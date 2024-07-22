@@ -1,0 +1,17 @@
+@app.route('/parse', methods=['POST'])
+def parse_resume():
+    if 'resume' not in request.files:
+        return jsonify({'error': 'No file part'})
+
+    file = request.files['resume']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'})
+
+    if file and allowed_file(file.filename):
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(filepath)
+        print(f"Saved file to {filepath}")  # Debug statement
+        parsed_data = parse_resume_file(filepath)
+        return jsonify(parsed_data)
+    else:
+        return jsonify({'error': 'Invalid file format'})

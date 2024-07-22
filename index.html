@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Resume Parser</title>
+    <style>
+        .result {
+            margin-top: 20px;
+        }
+        .result b {
+            display: inline-block;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Automated Resume Parser</h1>
+    <form action="/parse" method="post" enctype="multipart/form-data">
+        <input type="file" name="resume" required>
+        <input type="submit" value="Parse Resume">
+    </form>
+    {% if parsed_data %}
+        <div class="result">
+            <h2>Parsed Data:</h2>
+            <p><b>Name:</b> {{ parsed_data['Name'] }}</p>
+            <p><b>Email:</b> {{ parsed_data['Email'] }}</p>
+            <p><b>Phone Number:</b> {{ parsed_data['Phone Number'] }}</p>
+            <p><b>GitHub:</b> {{ parsed_data['GitHub'] }}</p>
+            <p><b>Summary:</b> {{ parsed_data['Summary'] }}</p>
+            <p><b>Projects:</b> {{ parsed_data['Projects'] }}</p>
+            <p><b>Education:</b> {{ parsed_data['Education'] }}</p>
+            <p><b>Certifications:</b> {{ parsed_data['Certifications'] }}</p>
+            <p><b>Skills:</b> {{ parsed_data['Skills'] }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
+
+
+
+
